@@ -1,0 +1,4 @@
+export const SEARCH_LESSONS = 'SEARCH_LESSONS'
+export const ADD_LESSON = 'ADD_LESSON'
+export const EDIT_LESSON = 'EDIT_LESSON'
+export const DELETE_LESSON = 'DELETE_LESSON'

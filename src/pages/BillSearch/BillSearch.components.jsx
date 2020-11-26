@@ -1,0 +1,34 @@
+import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Container } from '../../components/Container'
+import SearchBar from '../../components/SearchBar/SearchBar.components'
+import BillList from '../../components/AllBillList/AllBillList.components'
+import example from '../../util/example'
+import POST_API from '../../api/default'
+export default () => {
+    const [list, setList] = useState([])
+    const dispatch = useDispatch()
+    const handleSearch = (grade, student, month) => {
+        // const paymentMonth = example.month.find(m => m.value == month).id
+        // POST_API('/academy03/01', { paymentMonth, name: student }).then(result => {
+        //     console.log(result)
+        //     dispatch({ type: 'SEARCH_STUDENT_BILL_LIST', payload: { BillList: result.data } })
+        // })
+
+        // dispatch({
+        //     type: 'SEARCH_STUDENT_BILL_LIST',
+        //     payload: {
+        //         student, paymentMonth: grade
+        //     }
+        // })
+        let g = grade === '全部' ? '' : grade
+        setList(example.student.filter(x => x.name.includes(student) && x.grade.includes(g)))
+    }
+    const Bill = useSelector(state => state.bill.BillList)
+    return (
+        <Container>
+            <SearchBar handleSearch={(grade, student, month) => handleSearch(grade, student, month)} mode={'BillSearch'} />
+            <BillList list={list} flag={'search'} />
+        </Container>
+    )
+}
