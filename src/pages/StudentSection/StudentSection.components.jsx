@@ -23,7 +23,7 @@ export default withRouter(({ match, location, history }) => {
             else
                 setStudent({ ...student, courseFeeList: [{ [name]: value }] })
         }
-        else if(mode === 'save'){
+        else if (mode === 'save') {
             student.courseFeeList.forEach(x => student.courseFeeList[index] = value)
             setStudent({ ...student, student })
         }
@@ -51,15 +51,29 @@ export default withRouter(({ match, location, history }) => {
 
     const handleSaveStudent = (mode) => {
         if (mode == 'add') {
-            POST_API('/academy01/02', {...student, courseFeeList: student.courseFeeList ? student.courseFeeList : [] }).then(({ data }) => {
-                dispatch({ type: 'ADD_STUDENT', payload: { Student: student } })
+            student.newNote = student.newNote == '1' ? true : false
+            student.leaveNote = student.leaveNote == '1' ? true : false
+            student.handoutExemption = student.handoutExemption == '1' ? true : false
+            student.engDiscount = student.engDiscount == '1' ? true : false
+            student.mathDiscount = student.mathDiscount == '1' ? true : false
+            student.newDate = new Date()
+            POST_API('/academy01/02', { ...student, courseFeeList: student.courseFeeList ? student.courseFeeList : [] }).then(({ data }) => {
+                // dispatch({ type: 'ADD_STUDENT', payload: { Student: student } })
             })
         }
         else if (mode == 'edit') {
-            POST_API('/academy01/02', { ...student, courseFeeList: student.courseFeeList ? student.courseFeeList : [] }).then(({ data }) => {
-                dispatch({ type: 'EDIT_STUDENT', payload: { Student: student } })
+            student.newNote = student.newNote == '1' ? true : false
+            student.leaveNote = student.leaveNote == '1' ? true : false
+            student.handoutExemption = student.handoutExemption == '1' ? true : false
+            student.engDiscount = student.engDiscount == '1' ? true : false
+            student.mathDiscount = student.mathDiscount == '1' ? true : false
+            student.newDate = new Date()
+            console.log(student)
+            POST_API('/academy01/02', { ...student, courseFeeList: student.courseFeeList ? student.courseFeeList : [] }).then(() => {
+                // dispatch({ type: 'EDIT_STUDENT', payload: { Student: student } })
             })
         }
+        dispatch({ type: 'CLEAN_STUDENT', payload: {} })
         history.push('/student')
     }
     let disabled = mode === 'view' ? true : false

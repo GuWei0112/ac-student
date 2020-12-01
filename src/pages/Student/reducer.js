@@ -1,4 +1,5 @@
-import { SEARCH_STUDENT, EDIT_STUDENT, EDIT_STUDENT_GRADE, ADD_STUDENT, EXPORT_STUDENT_GRADE } from './action'
+import { SEARCH_STUDENT, EDIT_STUDENT, EDIT_STUDENT_GRADE,
+     ADD_STUDENT, EXPORT_STUDENT_GRADE, CLEAN_STUDENT } from './action'
 import example from '../../util/example'
 const initializeState = {
     Student: []
@@ -27,6 +28,8 @@ const StudentReducer = (state = initializeState, action) => {
             return { ...state, Student }
         case EXPORT_STUDENT_GRADE: //學生資料匯出總表
             return state
+        case CLEAN_STUDENT:
+            return initializeState
         default:
             return state
     }
