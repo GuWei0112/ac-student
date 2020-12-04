@@ -19,3 +19,7 @@ export const BillListContainer =styled.div`
     display: grid;
     grid-template-columns: repeat(3,1fr);
 `
+
+export const BillListButton = styled.i`
+margin: 5px;
+`

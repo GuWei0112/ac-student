@@ -40,13 +40,15 @@ const BillReducer = (state = initializeState, action) => {
                 BillList: action.payload.paymentList
             }
         case ADD_BILL: // 新增明細
+            var i = action.payload.index
             // TODO
             // POST_API('/academy03/04',{payMainId: action.payload.payMainId, name: action.payload.student})
             return state
         case EDIT_BILL: // 編輯明細
             // TODO
             // POST_API('/academy03/04',{payMainId: action.payload.payMainId, name: action.payload.student})
-            return state
+            // BillList
+            return {...state, BillList:[action.payload.BillList]}
         case CONFIRM_BILL: // 已繳費完成
             // TODO
             // POST_API('/academy03/05',{payMainId: action.payload.payMainId, name: action.payload.student})

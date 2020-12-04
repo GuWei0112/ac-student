@@ -24,6 +24,8 @@ const eduLevel = [{
     id: 7, title: '國一'
 }, {
     id: 8, title: '國二'
+},{
+    id: 9, title: '國三'
 }]
 
 const student = [{
