@@ -8,8 +8,16 @@ export default () => {
     const [list, setList] = useState([])
 
     const handleSearch = (grade, student) => {
-        let g = grade === '全部' ? '' : grade
-        setList(example.student.filter(x => x.name.includes(student) && x.grade.includes(g)))
+        let g = grade === '全部' ? '' : example.eduLevel.find(edu => edu.title == grade).id
+        POST_API('/academy03/02', { grade: g, name: student }).then(result => {
+            // POST_API('/academy03/01', { paymentMonth, name: student }).then(result => {
+                console.log(result)
+                if(result.data){
+                    setList(result.data)
+                }
+                // dispatch({ type: 'SEARCH_STUDENT_BILL_LIST', payload: { BillList: [result.data] } })
+            })
+        // setList(example.student.filter(x => x.name.includes(student) && x.grade.includes(g)))
     }
     return (
         <Container>

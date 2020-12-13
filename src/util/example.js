@@ -28,6 +28,30 @@ const eduLevel = [{
     id: 9, title: '國三'
 }]
 
+const studentLevel = [{
+    id: 10, title: '國小'
+},{
+    id: 11, title: '國中'
+},{
+    id: 1, title: '一年級'
+}, {
+    id: 2, title: '二年級'
+}, {
+    id: 3, title: '三年級'
+}, {
+    id: 4, title: '四年級'
+}, {
+    id: 5, title: '五年級'
+}, {
+    id: 6, title: '六年級'
+}, {
+    id: 7, title: '國一'
+}, {
+    id: 8, title: '國二'
+},{
+    id: 9, title: '國三'
+}]
+
 const student = [{
     stdntId: 1, name: '羅測試', birth: '2001/1/1', idCard: 'A1234567890', parentName: '',
     newNote: true, leaveNote: false, newDate: '', leaveDate: '',
@@ -106,6 +130,14 @@ const courseFeeList = [{
     courseFeeId: 4, courseFeeName: '安親班'
 }]
 
+const payDept = [{
+    id: 1, title: '大有本部'
+},{
+    id: 2, title: '大成本部'
+},{
+    id: 3, title: '其他'
+}]
+
 export default {
-    menu, eduLevel, student, studentType, courseFeeList, month
+    menu, eduLevel, student, studentType, courseFeeList, month, payDept, studentLevel
 }

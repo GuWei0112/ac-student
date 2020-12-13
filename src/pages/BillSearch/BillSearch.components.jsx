@@ -10,11 +10,13 @@ export default () => {
     const [list, setList] = useState([])
     const dispatch = useDispatch()
     const handleSearch = (grade, student, month) => {
-        const paymentMonth = example.month.find(m => m.value == month).id
-        POST_API('/academy03/01', { paymentMonth: 10, name: "段純貞" }).then(result => {
-        // POST_API('/academy03/01', { paymentMonth, name: student }).then(result => {
+        var paymentMonth = example.month.find(m => m.value == month).id
+        paymentMonth = 10
+        POST_API('/academy03/01', { paymentMonth, name: "段純貞" }).then(result => {
             console.log(result)
-            dispatch({ type: 'SEARCH_STUDENT_BILL_LIST', payload: { BillList: [result.data] } })
+            // POST_API('/academy03/01', { paymentMonth, name: student }).then(result => {
+            if (result.data)
+                dispatch({ type: 'SEARCH_STUDENT_BILL_LIST', payload: { BillList: [result.data] } })
         })
 
         // dispatch({

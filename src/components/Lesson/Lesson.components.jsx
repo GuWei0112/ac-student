@@ -12,7 +12,7 @@ export default ({ mode, handleSumbit, course, flag }) => {
     }
     const selectedCourses = Courses.find(course => course.courseFeeId == lesson.courseFeeId)
 
-    const handleOnChange = (e)=> {
+    const handleOnChange = (e) => {
         setLesson({ ...lesson, courseFeeName: e.target.value })
     }
 
@@ -20,7 +20,7 @@ export default ({ mode, handleSumbit, course, flag }) => {
         switch (flag) {
             case 'student':
                 return pattern === 'edit' || pattern === 'add' ?
-                    <select value={lesson.courseFeeName} onChange={e => setLesson({ ...lesson, courseFeeId: e.target.value })}>
+                    <select value={selectedCourses?selectedCourses.courseFeeId:''} onChange={e => setLesson({ ...lesson, courseFeeId: e.target.value })}>
                         {Courses.map(l =>
                             <option value={l.courseFeeId}>{l.courseFeeName}</option>
                         )}
@@ -49,7 +49,9 @@ export default ({ mode, handleSumbit, course, flag }) => {
                     :
                     pattern === 'view' ? [] : <LessonButton className='fas fa-pen' onClick={() => setPattern('edit')}></LessonButton>
             default:
-                return (pattern === 'edit' || pattern === 'add') && <LessonButton className='fas fa-save' onClick={(e) => handleOnClick(e, 'save')}></LessonButton>
+                return (pattern === 'edit' || pattern === 'add') ? <LessonButton className='fas fa-save' onClick={(e) => handleOnClick(e, 'save')}></LessonButton>
+                    :
+                    pattern === 'view' ? [] : <LessonButton className='fas fa-pen' onClick={() => setPattern('edit')}></LessonButton>
         }
     }
     return (

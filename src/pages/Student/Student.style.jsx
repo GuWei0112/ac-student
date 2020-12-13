@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const StudentButton = styled.button`
 position: absolute;
 top: 14vh;
-left: 848px;
+left: 66vw;
 background-color: #3a5465;
 font-size: 17px;
 border-radius: 30px;

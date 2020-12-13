@@ -3,18 +3,19 @@ import {ReceiptItemContainer, ReceiptButton, ReceiptItem, ReceiptText} from './R
 import { withRouter } from 'react-router-dom'
 
 export default withRouter(({
+    stdntId,
     name,
     grade,
     lastPaymentDate,
     student,
-    history }) => {
+    history, onCheck }) => {
 
     const handleClick = (mode) => {
         history.push(`/bill/record/${mode}`, { student })
     }
     return (
         <ReceiptItemContainer>
-            <ReceiptText type='checkbox'/>
+            <ReceiptText type='checkbox' onChange={e=> onCheck(e, stdntId)}/>
             <ReceiptItem>{name}</ReceiptItem>
             <ReceiptItem>{grade}</ReceiptItem>
             <ReceiptItem>{lastPaymentDate}</ReceiptItem>

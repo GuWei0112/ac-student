@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { BillSectionContainer, BillListContainer, BillListButton } from './BillSearchSection.style'
 import { Container } from '../../components/Container'
 import { useDispatch, useSelector } from 'react-redux'
-export default ({ name }) => {
+import example from '../../util/example'
+import POST_API from '../../api/default'
+export default () => {
     const dispatch = useDispatch()
     const [mode, setMode] = useState('view')
     const BillList = useSelector(state => state.bill.BillList)
@@ -20,7 +22,7 @@ export default ({ name }) => {
     const renderSelect = (value, onChange) => {
         switch (mode) {
             case 'edit':
-                return <select value={value} onChange={e=>onChange(e.target.value)}>
+                return <select value={value} onChange={e => onChange(e.target.value)}>
                     {Courses.map(l =>
                         <option value={l.courseFeeId}>{l.courseFeeName}</option>
                     )}
@@ -33,13 +35,13 @@ export default ({ name }) => {
     const renderPay = (value, onChange) => {
         switch (value) {
             case '':
-                return <div> 
-                <select value={value}>
-                    {[{value:'455'},{value: '123'}].map(l =>
-                        <option value={l.value}>{l.value}</option>
-                    )}
-                </select>
-                <button>已繳費</button>
+                return <div>
+                    <select value={value} onChange={e => onChange(e.target.value)}>
+                        {example.payDept.map(l =>
+                            <option value={l.title}>{l.title}</option>
+                        )}
+                    </select>
+                    <button>已繳費</button>
                 </div>
             default:
                 return value
@@ -64,8 +66,11 @@ export default ({ name }) => {
                 remark: ''
             })
         }
-        else {
+        else if (mode == 'edit') {
             Bill.courseFeeList[index] = { ...Bill.courseFeeList[index], [name]: value }
+
+        } else {
+            Bill = { ...Bill, [name]: value }
         }
 
         dispatch({
@@ -73,6 +78,24 @@ export default ({ name }) => {
             payload: { BillList: Bill }
         })
     }
+
+    const saveBill = (payType) => {
+        var { payMainId, stdntId, courseFeeList, grade, paymentMonth, ReceivingUnit = '大有分校' } = BillList.map(x => x)[0]
+        if (payType == 'saveBill') {
+            POST_API('/academy03/04', { payMainId, stdntId, courseFeeList, grade, paymentMonth }).then(result => {
+                console.log(result)
+                // dispatch({ type: 'SEARCH_STUDENT_BILL_LIST', payload: { BillList: [result.data] } })
+            })
+        }
+        else {
+            POST_API('/academy03/05', { payMainId, ReceivingUnit }).then(result => {
+                console.log(result)
+                // dispatch({ type: 'SEARCH_STUDENT_BILL_LIST', payload: { BillList: [result.data] } })
+            })
+        }
+        handleChangeMode('view')
+    }
+
 
     return (
         <Container>
@@ -83,12 +106,15 @@ export default ({ name }) => {
                         <BillListContainer flag={x.payDate != '' ? 'done' : 'none'}>
                             <div>創立日期:{x.paymentCrDate}</div>
                             {/* <div>繳交日期:{renderPay(x.payDate)}</div> */}
-                            <div>繳交日期:{renderPay('')}</div>
+
+                            <div>
+                                <div>繳交單位:{x.ReceivingUnit}</div>
+                                繳交日期:{renderPay('', (value) => editBill('ReceivingUnit', value, '', ''))}</div>
                             <div style={{ padding: '10px' }}>
                                 {mode == 'edit' &&
                                     <React.Fragment>
                                         <BillListButton className="fas fa-plus" onClick={() => editBill('', '', '', 'add')}></BillListButton>
-                                        <BillListButton className="fas fa-save" onClick={() => handleChangeMode('view')}></BillListButton>
+                                        <BillListButton className="fas fa-save" onClick={() => saveBill()}></BillListButton>
                                     </React.Fragment>
                                 }
                                 {mode != 'edit' &&
@@ -99,10 +125,11 @@ export default ({ name }) => {
                             <div style={{ gridColumn: '1/4' }}>
                                 {x.courseFeeList.length > 0 ? x.courseFeeList.map((y, i) =>
                                     <div style={{ display: 'grid', gridTemplateColumns: mode == 'edit' ? 'repeat(5,1fr)' : 'repeat(4,1fr)' }}>
-                                        <div>{renderSelect(y.courseFeeId, (value) => editBill('courseFeeId', value, i, ''))}</div>
-                                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)' }}>{renderInput(y.expenseMonthStart, (value) => editBill('expenseMonthStart', value, i, ''))} - {renderInput(y.expenseMonthEnd, (value) => editBill('expenseMonthEnd', value, i, ''))}</div>
-                                        <div>{renderInput(y.expense, (value) => editBill('expense', value, i, ''))}</div>
-                                        <div>{renderInput(y.remark, (value) => editBill('remark', value, i, ''))}</div>
+                                        <div>{renderSelect(y.courseFeeId, (value) => editBill('courseFeeId', value, i, 'edit'))}</div>
+                                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)' }}>
+                                            {renderInput(y.expenseMonthStart, (value) => editBill('expenseMonthStart', value, i, 'edit'))} - {renderInput(y.expenseMonthEnd, (value) => editBill('expenseMonthEnd', value, i, 'edit'))}</div>
+                                        <div>{renderInput(y.expense, (value) => editBill('expense', value, i, 'edit'))}</div>
+                                        <div>{renderInput(y.remark, (value) => editBill('remark', value, i, 'edit'))}</div>
                                         {mode == 'edit' &&
                                             <BillListButton className="fas fa-trash" onClick={() => editBill('', '', i, 'delete')}></BillListButton>
                                         }

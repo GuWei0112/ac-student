@@ -1,21 +1,23 @@
-import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import React from 'react'
 import { Container } from '../../components/Container'
 import ReportBar from '../../components/ReportBar/ReportBar.components'
-import POST_API from '../../api/default'
+import {GET_API} from '../../api/default'
 import example from '../../util/example'
-export default () => {
-    const dispatch = useDispatch()
 
-    const handleSearch = (grade, student) => {
-        let g = grade === '全部' ? '' : example.eduLevel.find(edu => edu.title == grade).id
-        POST_API('/academy06/01', { grade: g, student }).then(result => {
-            dispatch({ type: 'EXPORT_STUDENT_GRADE' })
+export default () => {
+    const handleSearch = (grade) => {
+        let g = example.studentLevel.find(edu => edu.title == grade).id
+        g = '5'
+        GET_API(`/academy06/01/${g}/1`).then(result=>{
+            console.log(result)
+            if(result.data = 'success'){
+                window.open(`http://localhost:8080/angel/academy06/01/${g}/2`)
+            }
         })
     }
     return (
         <Container>
-            <ReportBar handleSearch={(grade, student) => handleSearch(grade, student)} mode={'Student'} />
+            <ReportBar handleSearch={(grade) => handleSearch(grade)} mode={'Student'} />
         </Container>
     )
 }

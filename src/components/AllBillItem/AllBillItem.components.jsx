@@ -3,7 +3,7 @@ import { BillButton, BillItem, BillItemContainer } from './AllBillItem.style'
 import { withRouter } from 'react-router-dom'
 
 export default withRouter(({
-    name,
+    stdntName,
     grade,
     lastPaymentDate,
     student,
@@ -20,7 +20,7 @@ export default withRouter(({
     }
     return (
         <BillItemContainer>
-            <BillItem>{name}</BillItem>
+            <BillItem>{stdntName}</BillItem>
             <BillItem>{grade}</BillItem>
             <BillItem>{lastPaymentDate}</BillItem>
             {
