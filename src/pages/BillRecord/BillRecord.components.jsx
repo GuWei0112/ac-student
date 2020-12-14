@@ -8,7 +8,7 @@ export default () => {
     const [list, setList] = useState([])
 
     const handleSearch = (grade, student) => {
-        let g = grade === '全部' ? '' : example.eduLevel.find(edu => edu.title == grade).id
+        let g = grade === '全部' ? '' : example.eduLevel.find(edu => edu.title === grade).id
         POST_API('/academy03/02', { grade: g, name: student }).then(result => {
             // POST_API('/academy03/01', { paymentMonth, name: student }).then(result => {
                 if(result.data){

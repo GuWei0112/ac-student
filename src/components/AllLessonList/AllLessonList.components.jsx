@@ -11,8 +11,8 @@ export default () => {
         if (mode === 'new') {
             dispatch({ type: 'ADD_LESSON', payload: { ...lesson, insertOrDelete: 'I' } })
         }
-        else if(mode==='save'){
-            POST_API('/academy02/02', {...lesson, insertOrDelete:'I'}).then(({ data }) => {
+        else if (mode === 'save') {
+            POST_API('/academy02/02', { ...lesson, insertOrDelete: 'I' }).then(({ data }) => {
                 dispatch({ type: 'EDIT_LESSON', payload: { index, value: lesson } })
             })
         }
@@ -29,7 +29,7 @@ export default () => {
             課程清單
             <AllLessonAddButton className="fas fa-plus" onClick={() => handleSumbit('new', 0, { courseFeeId: Courses[Courses.length - 1].courseFeeId++, courseFeeName: '' })}></AllLessonAddButton>
             {Courses.map((x, index) => <Lesson course={x}
-                handleSumbit={(mode, lessonList, lesson) => handleSumbit(mode, index, lesson)} mode={x.courseFeeName != '' ? 'done' : 'add'} />)}
+                handleSumbit={(mode, lessonList, lesson) => handleSumbit(mode, index, lesson)} mode={x.courseFeeName !== '' ? 'done' : 'add'} />)}
         </AllLessonContainer>
     )
 }

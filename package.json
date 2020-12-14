@@ -20,6 +20,7 @@
     "wait-on": "^5.2.0"
   },
   "scripts": {
+    "uat": "concurrently \"npm run start\" \"wait-on http://localhost:3000 && electron .\"",  
     "dev": "concurrently \"npm start\" \"wait-on http://localhost:3000 && electron .\"",
     "start": "react-scripts start",
     "build": "react-scripts build",

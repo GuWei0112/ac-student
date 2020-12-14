@@ -50,25 +50,24 @@ export default withRouter(({ match, location, history }) => {
     }
 
     const handleSaveStudent = (mode) => {
-        if (mode == 'add') {
-            student.newNote = student.newNote == '1' ? true : false
-            student.leaveNote = student.leaveNote == '1' ? true : false
-            student.handoutExemption = student.handoutExemption == '1' ? true : false
-            student.engDiscount = student.engDiscount == '1' ? true : false
-            student.mathDiscount = student.mathDiscount == '1' ? true : false
+        if (mode === 'add') {
+            student.newNote = student.newNote === '1' ? true : false
+            student.leaveNote = student.leaveNote === '1' ? true : false
+            student.handoutExemption = student.handoutExemption === '1' ? true : false
+            student.engDiscount = student.engDiscount === '1' ? true : false
+            student.mathDiscount = student.mathDiscount === '1' ? true : false
             student.newDate = new Date()
             POST_API('/academy01/02', { ...student, courseFeeList: student.courseFeeList ? student.courseFeeList : [] }).then(({ data }) => {
                 // dispatch({ type: 'ADD_STUDENT', payload: { Student: student } })
             })
         }
-        else if (mode == 'edit') {
-            student.newNote = student.newNote == '1' ? true : false
-            student.leaveNote = student.leaveNote == '1' ? true : false
-            student.handoutExemption = student.handoutExemption == '1' ? true : false
-            student.engDiscount = student.engDiscount == '1' ? true : false
-            student.mathDiscount = student.mathDiscount == '1' ? true : false
+        else if (mode === 'edit') {
+            student.newNote = student.newNote === '1' ? true : false
+            student.leaveNote = student.leaveNote === '1' ? true : false
+            student.handoutExemption = student.handoutExemption === '1' ? true : false
+            student.engDiscount = student.engDiscount === '1' ? true : false
+            student.mathDiscount = student.mathDiscount === '1' ? true : false
             student.newDate = new Date()
-            console.log(student)
             POST_API('/academy01/02', { ...student, courseFeeList: student.courseFeeList ? student.courseFeeList : [] }).then(() => {
                 // dispatch({ type: 'EDIT_STUDENT', payload: { Student: student } })
             })
@@ -93,7 +92,7 @@ export default withRouter(({ match, location, history }) => {
                 <LessonList courses={student.courseFeeList ? student.courseFeeList : []}
                     handleSumbit={(mode, i, name, value) => handleLessonOnChange(mode, i, name, value)} mode={mode} flag={'student'} />
                 <StudentSectionLine></StudentSectionLine>
-                {mode == 'edit' || mode == 'add' ?
+                {mode === 'edit' || mode === 'add' ?
                     <React.Fragment>
                         <Button title={'儲存'} handleSubmit={() => { handleSaveStudent(mode) }} />
                         <Button title={'取消'} handleOnClick={() => { history.push('/student') }} />

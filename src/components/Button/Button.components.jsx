@@ -11,6 +11,8 @@ export default ({ title, handleOnClick, handleSubmit, style }) => {
             case '修改':
             case '新增':
                 return handleSubmit()
+            default:
+                break
         }
     }
     return (<ButtonContainer style={style ? style : {}}>

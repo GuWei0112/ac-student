@@ -10,9 +10,8 @@ export default () => {
     const [selectedStd, setSelectedStd] = useState([])
 
     const handleSearch = (grade, student) => {
-        let g = grade === '全部' ? '' : example.eduLevel.find(edu => edu.title == grade).id
+        let g = grade === '全部' ? '' : example.eduLevel.find(edu => edu.title === grade).id
         POST_API('/academy03/06', { grade: g, name: student }).then(result => {
-            console.log(result)
             if (result.data) {
                 setList(result.data)
             }

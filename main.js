@@ -13,11 +13,14 @@ function createWindow() {
     webPreferences: {
       nodeIntegration: true,
       webviewTag: true,
-      nodeIntegrationInWorker: true
+      nodeIntegrationInWorker: true,
+      enableRemoteModule: true
       // preload: path.join(__dirname, './src/electron/preload.js')
     }
     // , titleBarStyle: 'hidden'
   })
+  mainWindow.openDevTools()
+  global.mainWindow = mainWindow
   //const startURL = isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '../build/index.html')}`;
   mainWindow.maximize()
   mainWindow.loadURL('http://localhost:3000');

@@ -11,7 +11,7 @@ export default () => {
     const Student = useSelector(state => state.student.Student)
 
     const handleSearch = (grade, student) => {
-        let g = grade === '全部' ? '' : example.eduLevel.find(edu => edu.title == grade).id
+        let g = grade === '全部' ? '' : example.eduLevel.find(edu => edu.title === grade).id
         POST_API('/academy01/01', { grade: g, name: student }).then(result => {
             dispatch({ type: 'SEARCH_STUDENT', payload: { Student: result.data } })
         })

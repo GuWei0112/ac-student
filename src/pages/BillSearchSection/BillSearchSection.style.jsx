@@ -10,7 +10,7 @@ export const BillSectionContainer = styled.div`
 `
 
 export const BillListContainer =styled.div`
-    background: ${props => props.flag == 'done'? '#64a97b':'#B15353'};
+    background: ${props => props.flag === 'done'? '#64a97b':'#B15353'};
     margin: auto;
     margin-bottom: 5px;
     width: 80%;

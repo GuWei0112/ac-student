@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { LessonListContainer, LessonAddButton } from './LessonList.style'
 import Lesson from '../Lesson/Lesson.components'
 import { useSelector} from 'react-redux'

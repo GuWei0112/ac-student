@@ -29,7 +29,7 @@ export default withRouter(({ handleSearch, mode }) => {
                         }
                     </SearchDropdownContent>
                 </SearchDropdownContainer>
-                {mode != 'Student' &&
+                {mode !== 'Student' &&
                     <SearchDropdownContainer>
                         {month}
                         <SearchDropdownButton className="fas fa-angle-up" />

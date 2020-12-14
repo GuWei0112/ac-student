@@ -16,7 +16,7 @@ export default withRouter(({ location, match, history }) => {
 
     useEffect(() => {
         if (location.state.student) { // find recent bill
-            let g = location.state.student.grade === '全部' ? '' : example.eduLevel.find(edu => edu.title == location.state.student.grade).id
+            let g = location.state.student.grade === '全部' ? '' : example.eduLevel.find(edu => edu.title === location.state.student.grade).id
             POST_API('/academy03/03', { grade: g, stdntId: location.state.student.stdntId }).then(result => {
                 dispatch({ type: 'SEARCH_RECENT_BILL', payload: {} })
                 if(result)
@@ -61,8 +61,9 @@ export default withRouter(({ location, match, history }) => {
 
     const handleSave = () => {
         if (student) {
-            let g = student.grade === '全部' ? '' : example.eduLevel.find(edu => edu.title == student.grade).id
-            POST_API('/academy03/04', { payMainId: '', courseFeeList: bill.courseFeeList, stdntId: student.stdntId, grade: g, paymentMonth: '10' }).then(result => {
+            let g = student.grade === '全部' ? '' : example.eduLevel.find(edu => edu.title === student.grade).id
+            var month = new Date().getMonth() +1
+            POST_API('/academy03/04', { payMainId: '', courseFeeList: bill.courseFeeList, stdntId: student.stdntId, grade: g, paymentMonth: month }).then(result => {
                 // console.log(result)
                 // dispatch({ type: 'ADD_BILL', payload: {} })
                 history.goBack()
@@ -80,10 +81,10 @@ export default withRouter(({ location, match, history }) => {
                     )}
                 </select>
             default:
-                return <div>{Courses.find(x => x.courseFeeId == value).courseFeeName}</div>
+                return <div>{Courses.find(x => x.courseFeeId === value).courseFeeName}</div>
         }
     }
-    console.log(bill)
+
     if (mode === 'add')
         return (
             <BillContainer>
@@ -149,7 +150,6 @@ export default withRouter(({ location, match, history }) => {
                         {student.paymentList[mode].courseFeeList.reduce((a, b) => parseInt(a.payment) + parseInt(b.payment))}</Bill>
                 </BillWrapper>
                 <Button title={'取消'} handleOnClick={() => { history.goBack() }} />
-
             </BillContainer>
         )
 })

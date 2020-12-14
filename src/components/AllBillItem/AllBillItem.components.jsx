@@ -24,7 +24,7 @@ export default withRouter(({
             <BillItem>{grade}</BillItem>
             <BillItem>{lastPaymentDate}</BillItem>
             {
-                flag == 'search' ? <BillButton className='fas fa-clipboard-list' onClick={() => handleClick(student.paymentList.length - 1)} /> :
+                flag === 'search' ? <BillButton className='fas fa-clipboard-list' onClick={() => handleClick(student.paymentList.length - 1)} /> :
                     <BillButton className='fas fa-calendar-plus' onClick={() => handleClick('add')} />
             }
         </BillItemContainer>

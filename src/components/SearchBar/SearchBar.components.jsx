@@ -19,6 +19,8 @@ export default withRouter(({ handleSearch, history, mode }) => {
             case 'month':
                 setMonth(value)
                 break
+            default:
+                break
         }
     }
 

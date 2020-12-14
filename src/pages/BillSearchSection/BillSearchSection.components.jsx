@@ -28,7 +28,7 @@ export default () => {
                     )}
                 </select>
             default:
-                return <div>{Courses.find(x => x.courseFeeId == value).courseFeeName}</div>
+                return <div>{Courses.find(x => x.courseFeeId === value).courseFeeName}</div>
         }
     }
 
@@ -50,10 +50,10 @@ export default () => {
 
     const editBill = (name, value, index, mode) => {
         var Bill = BillList.map(x => x)[0]
-        if (mode == 'delete') {
+        if (mode === 'delete') {
             var courseFeeList = Bill.courseFeeList.filter((x, i) => i !== index)
             Bill.courseFeeList = courseFeeList
-        } else if (mode == 'add') {
+        } else if (mode === 'add') {
             Bill.courseFeeList.push({
                 payRecordId: '',
                 courseFeeId: '1',
@@ -62,7 +62,7 @@ export default () => {
                 remark: ''
             })
         }
-        else if (mode == 'edit') {
+        else if (mode === 'edit') {
             Bill.courseFeeList[index] = { ...Bill.courseFeeList[index], [name]: value }
 
         } else {
@@ -77,8 +77,8 @@ export default () => {
 
     const saveBill = (payType) => {
         var { payMainId, stdntId, courseFeeList, grade, paymentMonth, receivingUnit} = BillList.map(x => x)[0]
-        let g = grade === '全部' ? '' : example.eduLevel.find(edu => edu.title == grade).id
-        if (payType == 'saveBill') {
+        let g = grade === '全部' ? '' : example.eduLevel.find(edu => edu.title === grade).id
+        if (payType === 'saveBill') {
             POST_API('/academy03/04', { payMainId, stdntId, courseFeeList, grade: g, paymentMonth }).then(result => {
                 console.log(result)
                 // dispatch({ type: 'SEARCH_STUDENT_BILL_LIST', payload: { BillList: [result.data] } })
@@ -100,32 +100,32 @@ export default () => {
                 {BillList[0].stdntName} {BillList[0].grade}
                 {
                     BillList.length > 0 ? BillList.map(x =>
-                        <BillListContainer flag={x.payDate != '' ? 'done' : 'none'}>
+                        <BillListContainer flag={x.payDate !== '' ? 'done' : 'none'}>
                             <div>創立日期:{x.paymentCrDate}</div>
                             <div>
                                 <div>繳交單位:{x.receivingUnit}</div>
                                 繳交日期:{renderPay(x.payDate, x.receivingUnit, (value) => editBill('receivingUnit', value, '', ''))}</div>
                             <div style={{ padding: '10px' }}>
-                                {mode == 'edit' &&
+                                {mode === 'edit' &&
                                     <React.Fragment>
                                         <BillListButton className="fas fa-plus" onClick={() => editBill('', '', '', 'add')}></BillListButton>
                                         <BillListButton className="fas fa-save" onClick={() => saveBill('saveBill')}></BillListButton>
                                     </React.Fragment>
                                 }
-                                {mode != 'edit' &&
+                                {mode !== 'edit' &&
                                     <BillListButton className="fas fa-pen" onClick={() => handleChangeMode('edit')}></BillListButton>
                                 }
                             </div>
 
                             <div style={{ gridColumn: '1/4' }}>
                                 {x.courseFeeList.length > 0 ? x.courseFeeList.map((y, i) =>
-                                    <div style={{ display: 'grid', gridTemplateColumns: mode == 'edit' ? 'repeat(5,1fr)' : 'repeat(4,1fr)' }}>
+                                    <div style={{ display: 'grid', gridTemplateColumns: mode === 'edit' ? 'repeat(5,1fr)' : 'repeat(4,1fr)' }}>
                                         <div>{renderSelect(y.courseFeeId, (value) => editBill('courseFeeId', value, i, 'edit'))}</div>
                                         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)' }}>
                                             {renderInput(y.expenseMonthStart, (value) => editBill('expenseMonthStart', value, i, 'edit'))} - {renderInput(y.expenseMonthEnd, (value) => editBill('expenseMonthEnd', value, i, 'edit'))}</div>
                                         <div>{renderInput(y.expense, (value) => editBill('expense', value, i, 'edit'))}</div>
                                         <div>{renderInput(y.remark, (value) => editBill('remark', value, i, 'edit'))}</div>
-                                        {mode == 'edit' &&
+                                        {mode === 'edit' &&
                                             <BillListButton className="fas fa-trash" onClick={() => editBill('', '', i, 'delete')}></BillListButton>
                                         }
                                     </div>

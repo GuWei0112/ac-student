@@ -10,7 +10,7 @@ export default ({ mode, handleSumbit, course, flag }) => {
         setPattern('done')
         handleSumbit(mode, 'lessonList', lesson)
     }
-    const selectedCourses = Courses.find(course => course.courseFeeId == lesson.courseFeeId)
+    const selectedCourses = Courses.find(course => course.courseFeeId === lesson.courseFeeId)
 
     const handleOnChange = (e) => {
         setLesson({ ...lesson, courseFeeName: e.target.value })
@@ -54,6 +54,7 @@ export default ({ mode, handleSumbit, course, flag }) => {
                     pattern === 'view' ? [] : <LessonButton className='fas fa-pen' onClick={() => setPattern('edit')}></LessonButton>
         }
     }
+    
     return (
         <LessonContainer>
             <LessonItemContainer flag={flag}>
