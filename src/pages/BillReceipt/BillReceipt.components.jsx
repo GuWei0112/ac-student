@@ -5,7 +5,6 @@ import ReceiptList from '../../components/ReceiptList/ReceiptList.components'
 import example from '../../util/example'
 import { ReceiptButton } from './BillReceipt.style'
 import POST_API from '../../api/default'
-//import {remote} from 'electron'
 export default () => {
     const [list, setList] = useState([])
     const [selectedStd, setSelectedStd] = useState([])

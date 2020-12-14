@@ -11,12 +11,12 @@ export default () => {
     const dispatch = useDispatch()
     const handleSearch = (grade, student, month) => {
         var paymentMonth = example.month.find(m => m.value == month).id
-        paymentMonth = 10
-        POST_API('/academy03/01', { paymentMonth, name: "段純貞" }).then(result => {
-            console.log(result)
+        POST_API('/academy03/01', { paymentMonth, name:student }).then(result => {
             // POST_API('/academy03/01', { paymentMonth, name: student }).then(result => {
-            if (result.data)
+            if (result.data.stdntName) {
                 dispatch({ type: 'SEARCH_STUDENT_BILL_LIST', payload: { BillList: [result.data] } })
+            }
+            else alert('查無資料')
         })
 
         // dispatch({

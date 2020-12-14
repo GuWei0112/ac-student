@@ -18,11 +18,9 @@ export default withRouter(({ location, match, history }) => {
         if (location.state.student) { // find recent bill
             let g = location.state.student.grade === '全部' ? '' : example.eduLevel.find(edu => edu.title == location.state.student.grade).id
             POST_API('/academy03/03', { grade: g, stdntId: location.state.student.stdntId }).then(result => {
-                console.log(result)
+                dispatch({ type: 'SEARCH_RECENT_BILL', payload: {} })
                 if(result)
                     setBill({...bill,courseFeeList:result.data.courseFeeList})
-                //console.log(result)
-                // dispatch({ type: 'SEARCH_RECENT_BILL', payload: { paymentList: result.data } })
             })
         }
     }, [location.state.student])
