@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import { HashRouter, Switch, Route } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import store from './pages/store'
 import './App.css';
@@ -20,10 +20,34 @@ import BillReport from './pages/BillReport/BillReport.components'
 import BillReceipt from './pages/BillReceipt/BillReceipt.components'
 import BillSection from './pages/BillSection/BillSection.components'
 function App() {
+  const handleOnclick = (mode) => {
+    const electron = window.require('electron')
+    var win = electron.remote.getCurrentWindow()
+    switch(mode){
+      case 'minimize':
+        win.minimize();
+        break
+      case 'maximize':
+        win.maximize()
+        break
+      case 'close':
+        win.close()
+        break
+      default:
+        break
+    }
+  }
   return (
-    <BrowserRouter>
+    <HashRouter basename='build'>
       <Provider store={store}>
         <div className="App">
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(10,1fr)', backgroundColor: 'grey' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gridArea: '7/10' }}>
+              <button onClick={()=>handleOnclick('minimize')}>-</button>
+              <button onClick={()=>handleOnclick('maximize')}>口</button>
+              <button onClick={()=>handleOnclick('close')}>x</button>
+            </div>
+          </div>
           <Header />
           <Switch>
             <Route exact path='/'><Home /></Route>
@@ -41,7 +65,7 @@ function App() {
           </Switch>
         </div>
       </Provider>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 

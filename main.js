@@ -1,7 +1,8 @@
-const { Tray, app, Menu, BrowserWindow, ipcMain  } = require('electron')
+const { Tray, app, Menu, BrowserWindow, ipcMain } = require('electron')
 
 const path = require('path')
-const url = require('url')
+// const url = require('url')
+const isDev = require("electron-is-dev")
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
@@ -19,19 +20,12 @@ function createWindow() {
     }
     // , titleBarStyle: 'hidden'
   })
-  mainWindow.openDevTools()
+  if (isDev)
+    mainWindow.openDevTools()
   global.mainWindow = mainWindow
-  //const startURL = isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '../build/index.html')}`;
+  const startURL = isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '../build/index.html')}`;
   mainWindow.maximize()
-  mainWindow.loadURL('http://localhost:3000');
-  // and load the index.html of the app.
-  //   mainWindow.loadURL(url.format({
-  //     pathname: path.join(__dirname, 'index.html'),
-  //     protocol: 'file:',
-  //     slashes: true
-  //   }))
-  // Open the DevTools.
-  // mainWindow.webContents.openDevTools()
+  mainWindow.loadURL(startURL);
 
   let tray = null;
   mainWindow.on('minimize', function (event) {

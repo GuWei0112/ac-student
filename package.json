@@ -2,6 +2,7 @@
   "name": "ac-student",
   "version": "0.1.0",
   "private": true,
+  "homepage": "./",
   "main": "main.js",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
@@ -9,7 +10,7 @@
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.20.0",
     "concurrently": "^5.3.0",
-    "electron": "^10.1.2",
+    "electron-is-dev": "^1.2.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.1",
@@ -20,12 +21,15 @@
     "wait-on": "^5.2.0"
   },
   "scripts": {
-    "uat": "concurrently \"npm run start\" \"wait-on http://localhost:3000 && electron .\"",  
+    "uat": "concurrently \"npm run start\" \"wait-on http://localhost:3000 && electron .\"",
     "dev": "concurrently \"npm start\" \"wait-on http://localhost:3000 && electron .\"",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=assets/icons/mac/icon.icns --prune=true --out=release-builds",
+    "package-win": "electron-packager . ac-student --overwrite --asar=true --platform=win32 --arch=ia32 --icon=assets/icons/win/icon.ico --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"ac-student\"",
+    "package-linux": "electron-packager . ac-student --overwrite --asar=true --platform=linux --arch=x64 --icon=assets/icons/png/1024x1024.png --prune=true --out=release-builds"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -41,5 +45,20 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "electron": "^10.2.0",
+    "electron-packager": "^15.2.0"
+  },
+  "build": {
+    "files": [
+      "build/**/*",
+      "node_modules/**/*"
+    ],
+    "publish": {
+      "provider": "github",
+      "repo": "ac-student",
+      "owner": "z"
+    }
   }
 }
