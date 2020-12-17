@@ -13,6 +13,14 @@
   }
 }
 
+#frame {
+  -webkit-app-region: drag;
+}
+
+#frame button{
+  -webkit-app-region: no-drag;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;

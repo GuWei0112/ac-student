@@ -20,8 +20,8 @@ function createWindow() {
     }
     // , titleBarStyle: 'hidden'
   })
-  if (isDev)
-    mainWindow.openDevTools()
+  // if (isDev)
+  //   mainWindow.openDevTools()
   global.mainWindow = mainWindow
   const startURL = isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '../build/index.html')}`;
   mainWindow.maximize()
