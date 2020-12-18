@@ -35,7 +35,7 @@ export default withRouter(({ handleSearch, mode }) => {
                         <SearchDropdownButton className="fas fa-angle-up" />
                         <SearchDropdownContent>
                             {
-                                example.month.map(x => <SearchDropdown onClick={() => handleOnClick('month', x.id)}>{x.value}</SearchDropdown>)
+                                example.month.map(x => <SearchDropdown onClick={() => handleOnClick('month', x.value)}>{x.value}</SearchDropdown>)
                             }
                         </SearchDropdownContent>
                     </SearchDropdownContainer>

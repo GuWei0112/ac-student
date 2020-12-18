@@ -1,7 +1,7 @@
 import React from 'react'
 import { SearchItemContainer, SearchItem, SearchButton } from './SearchItem.style'
 import { withRouter } from 'react-router-dom'
-
+import {useDispatch} from 'react-redux'
 export default withRouter(({
     name,
     newNote,
@@ -10,8 +10,10 @@ export default withRouter(({
     lastPaymentDate,
     student,
     history }) => {
+    const dispatch = useDispatch()
     const handleClick = (mode) => {
-        history.push(`/student/${mode}`, { student })
+        dispatch({ type: 'INSERT_TEMP_STUDENT', payload: { TempStudent: student } })
+        history.push(`/student/${mode}`)
     }
     return (
         <SearchItemContainer>

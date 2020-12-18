@@ -1,10 +1,11 @@
 import {
     SEARCH_STUDENT, EDIT_STUDENT, EDIT_STUDENT_GRADE,
-    ADD_STUDENT, EXPORT_STUDENT_GRADE, CLEAN_STUDENT
+    ADD_STUDENT, EXPORT_STUDENT_GRADE, CLEAN_STUDENT, INSERT_TEMP_STUDENT
 } from './action'
 import example from '../../util/example'
 const initializeState = {
-    Student: []
+    Student: [],
+    TempStudent: {}
 }
 
 const StudentReducer = (state = initializeState, action) => {
@@ -32,6 +33,8 @@ const StudentReducer = (state = initializeState, action) => {
             return state
         case CLEAN_STUDENT:
             return initializeState
+        case INSERT_TEMP_STUDENT:
+            return {...state, TempStudent: action.payload.TempStudent}
         default:
             return state
     }

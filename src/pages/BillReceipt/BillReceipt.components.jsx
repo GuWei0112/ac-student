@@ -28,7 +28,7 @@ export default () => {
     
     const handlePrint = () => {
         POST_API('/academy04/01', { studentIdList: selectedStd.toString() }).then(result => {
-            console.log(result)
+            alert(result.data)
         })
     }
 

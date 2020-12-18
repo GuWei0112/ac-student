@@ -30,7 +30,7 @@ export default withRouter(({ history }) => {
                 </HeaderBillContainer>
                 <HeaderLink onClick={e => ChangePage(e, 'lesson', '/lesson')}>課程維護</HeaderLink>
                 <HeaderBillContainer>
-                    <HeaderLink onClick={e => ChangePage(e, 'bill', '/bill')}>繳費</HeaderLink>
+                    <HeaderLink onClick={e => ChangePage(e, 'bill', '/bill/search')}>繳費</HeaderLink>
                     <HeaderBillContent>
                         <HeaderBill onClick={e => ChangePage(e, 'search', '/bill/search')}>繳費紀錄</HeaderBill>
                         <HeaderBill onClick={e => ChangePage(e, 'record', '/bill/record')}>應繳費明細</HeaderBill>

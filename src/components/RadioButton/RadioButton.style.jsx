@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const RadioContainer = styled.div`
 display: grid;
-grid-template-columns: 140px repeat(2,20px);
+grid-template-columns: 170px repeat(4,20px);
 align-items: center;
 `
 

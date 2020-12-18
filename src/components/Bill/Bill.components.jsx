@@ -7,23 +7,23 @@ import POST_API from '../../api/default'
 import example from '../../util/example'
 export default withRouter(({ location, match, history }) => {
     const dispatch = useDispatch()
-
+    const Student = useSelector(state => state.student.TempStudent)
     const Courses = useSelector(state => state.lesson.Courses)
-    const [student, setStudent] = useState(location.state ? location.state.student : {})
+    const [student, setStudent] = useState(Student ? Student : {})
     const [bill, setBill] = useState({})
     const [temp, setTemp] = useState({ courseFeeId: '', expense: '', remark: '', expenseMonthStart: '', expenseMonthEnd: '' })
     const { mode } = match.params
 
     useEffect(() => {
-        if (location.state.student) { // find recent bill
-            let g = location.state.student.grade === '全部' ? '' : example.eduLevel.find(edu => edu.title === location.state.student.grade).id
-            POST_API('/academy03/03', { grade: g, stdntId: location.state.student.stdntId }).then(result => {
+        if (Student) { // find recent bill
+            let g = Student.grade === '全部' ? '' : example.eduLevel.find(edu => edu.title === Student.grade).id
+            POST_API('/academy03/03', { grade: g, stdntId: Student.stdntId }).then(result => {
                 dispatch({ type: 'SEARCH_RECENT_BILL', payload: {} })
                 if(result)
                     setBill({...bill,courseFeeList:result.data.courseFeeList})
             })
         }
-    }, [location.state.student])
+    }, [Student])
 
     const handleClick = (mode, i) => {
         if (mode === 'edit') {
@@ -33,12 +33,12 @@ export default withRouter(({ location, match, history }) => {
         else if (mode === 'add') {
             var tempAdd = {}
             if (bill.courseFeeList) {
-                tempAdd = { payRecordId: '', state: 'edit', id: bill.courseFeeList.length + 1, courseFeeId: 1, remark: '123', expense: 100, expenseMonthStart: '10', expenseMonthEnd: '10' }
+                tempAdd = { payRecordId: '', state: 'edit', id: bill.courseFeeList.length + 1, courseFeeId: 1, remark: '', expense: 0, expenseMonthStart: '', expenseMonthEnd: '' }
                 bill.courseFeeList.push(tempAdd)
             } else {
                 bill.courseFeeList = []
-                tempAdd = { payRecordId: '', state: 'edit', id: bill.courseFeeList.length + 1, courseFeeId: 1, remark: '123', expense: 100, expenseMonthStart: '10', expenseMonthEnd: '10' }
-                bill.courseFeeList.push({ payRecordId: '', state: 'edit', id: bill.courseFeeList.length + 1, courseFeeId: 1, remark: '123', expense: 100, expenseMonthStart: '10', expenseMonthEnd: '10' })
+                tempAdd = { payRecordId: '', state: 'edit', id: bill.courseFeeList.length + 1, courseFeeId: 1, remark: '', expense: 0, expenseMonthStart: '', expenseMonthEnd: '' }
+                bill.courseFeeList.push(tempAdd)
             }
             setTemp(tempAdd)
         }

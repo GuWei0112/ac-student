@@ -3,7 +3,7 @@ const menu = [{
 }, {
     id: 2, title: '課程維護', link: 'lesson'
 }, {
-    id: 3, title: '繳費清單', link: 'bill'
+    id: 3, title: '繳費清單', link: 'bill/search'
 }]
 
 const eduLevel = [{

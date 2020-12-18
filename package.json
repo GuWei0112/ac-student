@@ -49,16 +49,5 @@
   "devDependencies": {
     "electron": "^10.2.0",
     "electron-packager": "^15.2.0"
-  },
-  "build": {
-    "files": [
-      "build/**/*",
-      "node_modules/**/*"
-    ],
-    "publish": {
-      "provider": "github",
-      "repo": "ac-student",
-      "owner": "z"
-    }
   }
 }

@@ -8,10 +8,11 @@ import example from '../../util/example'
 import Button from '../../components/Button/Button.components'
 import LessonList from '../../components/LessonList/LessonList.components'
 import POST_API from '../../api/default'
-import { useDispatch } from 'react-redux'
-export default withRouter(({ match, location, history }) => {
+import { useDispatch, useSelector } from 'react-redux'
+export default withRouter(({ match, history }) => {
     const dispatch = useDispatch()
-    const [student, setStudent] = useState(location.state ? location.state.student : {})
+    const Student = useSelector(state => state.student.TempStudent)
+    const [student, setStudent] = useState(Student ? Student : {})
     const { mode } = match.params
     const handleOnChange = (name, value) => {
         setStudent({ ...student, [name]: value })

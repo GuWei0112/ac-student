@@ -7,6 +7,7 @@ import POST_API from '../../api/default'
 export default () => {
     const dispatch = useDispatch()
     const [mode, setMode] = useState('view')
+    const [receiving, setReceiving] = useState('')
     const BillList = useSelector(state => state.bill.BillList)
     const Courses = useSelector(state => state.lesson.Courses)
 
@@ -34,12 +35,13 @@ export default () => {
 
     const renderPay = (value, receivingUnit, onChange) => {
         return <div>{value}
-            <select value={receivingUnit} onChange={e => onChange(e.target.value)}>
+           {!receivingUnit && <select value={receivingUnit} onChange={e => onChange(e.target.value)}>
                 {example.payDept.map(l =>
                     <option value={l.title}>{l.title}</option>
                 )}
             </select>
-            <button onClick={() => saveBill('')}>已繳費</button>
+    }
+            {!value && <button onClick={() => saveBill('')}>已繳費</button>}
         </div>
 
     }
@@ -76,17 +78,25 @@ export default () => {
     }
 
     const saveBill = (payType) => {
-        var { payMainId, stdntId, courseFeeList, grade, paymentMonth, receivingUnit} = BillList.map(x => x)[0]
+        var { payMainId, stdntId, courseFeeList, grade, paymentMonth,stdntName } = BillList.map(x => x)[0]
         let g = grade === '全部' ? '' : example.eduLevel.find(edu => edu.title === grade).id
         if (payType === 'saveBill') {
             POST_API('/academy03/04', { payMainId, stdntId, courseFeeList, grade: g, paymentMonth }).then(result => {
-                console.log(result)
+                alert(result.data)
                 // dispatch({ type: 'SEARCH_STUDENT_BILL_LIST', payload: { BillList: [result.data] } })
             })
         }
         else {
-            POST_API('/academy03/05', { payMainId, receivingUnit }).then(result => {
-                console.log(result)
+            POST_API('/academy03/05', { payMainId, receivingUnit: receiving }).then(result => {
+                alert(result.data)
+                if(result.data === 'success'){
+                    POST_API('/academy03/01', { paymentMonth, name:stdntName }).then(result => {
+                        if (result.data.stdntName) {
+                            dispatch({ type: 'SEARCH_STUDENT_BILL_LIST', payload: { BillList: [result.data] } })
+                        }
+                        else alert('查無資料')
+                    })
+                }
                 // dispatch({ type: 'SEARCH_STUDENT_BILL_LIST', payload: { BillList: [result.data] } })
             })
         }
@@ -104,7 +114,7 @@ export default () => {
                             <div>創立日期:{x.paymentCrDate}</div>
                             <div>
                                 <div>繳交單位:{x.receivingUnit}</div>
-                                繳交日期:{renderPay(x.payDate, x.receivingUnit, (value) => editBill('receivingUnit', value, '', ''))}</div>
+                                繳交日期:{renderPay(x.payDate, x.receivingUnit, (value) => setReceiving(value))}</div>
                             <div style={{ padding: '10px' }}>
                                 {mode === 'edit' &&
                                     <React.Fragment>
@@ -112,7 +122,7 @@ export default () => {
                                         <BillListButton className="fas fa-save" onClick={() => saveBill('saveBill')}></BillListButton>
                                     </React.Fragment>
                                 }
-                                {mode !== 'edit' &&
+                                {mode !== 'edit' && x.payDate == '' &&
                                     <BillListButton className="fas fa-pen" onClick={() => handleChangeMode('edit')}></BillListButton>
                                 }
                             </div>

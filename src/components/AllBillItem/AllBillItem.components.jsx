@@ -1,20 +1,23 @@
 import React from 'react'
 import { BillButton, BillItem, BillItemContainer } from './AllBillItem.style'
 import { withRouter } from 'react-router-dom'
-
+import {useDispatch} from 'react-redux'
 export default withRouter(({
     stdntName,
     grade,
     lastPaymentDate,
     student,
     history, flag }) => {
+    const dispatch = useDispatch()
     const handleClick = (mode) => {
         switch (flag) {
             case 'search':
-                history.push(`/bill/search/${mode}`, { student })
+                dispatch({ type: 'INSERT_TEMP_STUDENT', payload: { TempStudent: student } })
+                history.push(`/bill/search/${mode}`)
                 break
             default:
-                history.push(`/bill/record/${mode}`, { student })
+                dispatch({ type: 'INSERT_TEMP_STUDENT', payload: { TempStudent: student } })
+                history.push(`/bill/record/${mode}`)
                 break
         }
     }

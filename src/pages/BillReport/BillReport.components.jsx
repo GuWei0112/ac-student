@@ -4,7 +4,6 @@ import ReportBar from '../../components/ReportBar/ReportBar.components'
 import example from '../../util/example'
 import { GET_API } from '../../api/default'
 export default () => {
-
     const handleSearch = (grade, month) => {
         let g = example.studentLevel.find(edu => edu.title === grade).id
         let m = example.month.find(x => x.value === month).id

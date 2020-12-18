@@ -38,14 +38,14 @@ function App() {
     }
   }
   return (
-    <HashRouter basename='build'>
+    <HashRouter>
       <Provider store={store}>
         <div className="App">
           <div id='frame' style={{ display: 'grid', gridTemplateColumns: 'repeat(10,1fr)', backgroundColor: 'grey' }}>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gridArea: '7/10' }}>
-              <button onClick={()=>handleOnclick('minimize')}>-</button>
-              <button onClick={()=>handleOnclick('maximize')}>口</button>
-              <button onClick={()=>handleOnclick('close')}>x</button>
+              <button onClick={()=>handleOnclick('minimize')} style={{backgroundColor:'grey'}}>-</button>
+              <button onClick={()=>handleOnclick('maximize')} style={{backgroundColor:'grey'}}>口</button>
+              <button onClick={()=>handleOnclick('close')} style={{backgroundColor:'grey'}}>x</button>
             </div>
           </div>
           <Header />

@@ -52,7 +52,7 @@ export default withRouter(({ handleSearch, history, mode }) => {
                         </SearchDropdownContent>
                     </SearchDropdownContainer>
                 }
-                <SearchBarInput onChange={e => setStudent(e.target.value)} value={student} />
+                <SearchBarInput onChange={e => setStudent(e.target.value)} value={student} style={{color: 'white'}}/>
                 <SearchButton className="fas fa-search" onClick={() => handleSearch(grade, student, month)} />
                 {mode === 'Student' && <SearchButton className="fas fa-plus" onClick={() => handleAddStudent()} />}
             </SearchBarInputContainer>
