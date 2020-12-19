@@ -9,8 +9,7 @@ export default ({ list }) => {
             {list.length > 0 &&
                 <SearchListTitle>
                         <SearchList>姓名</SearchList>
-                        <SearchList>新生註記</SearchList>
-                        <SearchList>今年年級</SearchList>
+                        <SearchList>年級</SearchList>
                         <SearchList>最後繳交日期</SearchList>
                         <SearchList>功能</SearchList>
                     </SearchListTitle>}

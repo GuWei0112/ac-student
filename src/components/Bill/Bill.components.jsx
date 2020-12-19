@@ -9,7 +9,7 @@ export default withRouter(({ location, match, history }) => {
     const dispatch = useDispatch()
     const Student = useSelector(state => state.student.TempStudent)
     const Courses = useSelector(state => state.lesson.Courses)
-    const [student, ] = useState(Student ? Student : {})
+    const [student,] = useState(Student ? Student : {})
     const [bill, setBill] = useState({})
     const [temp, setTemp] = useState({ courseFeeId: '', expense: '', remark: '', expenseMonthStart: '', expenseMonthEnd: '' })
     const { mode } = match.params
@@ -18,9 +18,9 @@ export default withRouter(({ location, match, history }) => {
         if (Student) { // find recent bill
             let g = Student.grade === '全部' ? '' : example.eduLevel.find(edu => edu.title === Student.grade).id
             POST_API('/academy03/03', { grade: g, stdntId: Student.stdntId }).then(result => {
-                dispatch({ type: 'SEARCH_RECENT_BILL', payload: {} })
-                if(result)
-                    setBill({...bill,courseFeeList:result.data.courseFeeList})
+                dispatch({ type: 'SEARCH_RECENT_BILL', payload: { paymentList: [] } })
+                if (result)
+                    setBill({ ...bill, courseFeeList: result.data.courseFeeList })
             })
         }
     }, [Student])
@@ -62,7 +62,7 @@ export default withRouter(({ location, match, history }) => {
     const handleSave = () => {
         if (student) {
             let g = student.grade === '全部' ? '' : example.eduLevel.find(edu => edu.title === student.grade).id
-            var month = new Date().getMonth() +1
+            var month = new Date().getMonth() + 1
             POST_API('/academy03/04', { payMainId: '', courseFeeList: bill.courseFeeList, stdntId: student.stdntId, grade: g, paymentMonth: month }).then(result => {
                 // console.log(result)
                 // dispatch({ type: 'ADD_BILL', payload: {} })

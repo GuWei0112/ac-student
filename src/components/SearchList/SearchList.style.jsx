@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const SearchListTitle = styled.div`
 display: grid;
-grid-template-columns: repeat(5,1fr) repeat(1,80px);
+grid-template-columns: repeat(4,1fr) repeat(1,80px);
 width: 60%;
 margin: auto;
 margin-top: 10px;

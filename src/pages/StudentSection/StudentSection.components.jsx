@@ -9,6 +9,7 @@ import Button from '../../components/Button/Button.components'
 import LessonList from '../../components/LessonList/LessonList.components'
 import POST_API from '../../api/default'
 import { useDispatch, useSelector } from 'react-redux'
+import {transferDate} from '../../util/date'
 export default withRouter(({ match, history }) => {
     const dispatch = useDispatch()
     const Student = useSelector(state => state.student.TempStudent)
@@ -57,18 +58,25 @@ export default withRouter(({ match, history }) => {
             student.handoutExemption = student.handoutExemption === '1' ? true : false
             student.engDiscount = student.engDiscount === '1' ? true : false
             student.mathDiscount = student.mathDiscount === '1' ? true : false
+            student.birth = transferDate(student.birth)
+            student.newDate = transferDate(student.newDate)
+            student.leaveDate = transferDate(student.leaveDate)
             student.newDate = new Date()
             POST_API('/academy01/02', { ...student, courseFeeList: student.courseFeeList ? student.courseFeeList : [] }).then(({ data }) => {
                 // dispatch({ type: 'ADD_STUDENT', payload: { Student: student } })
             })
         }
         else if (mode === 'edit') {
+            console.log(student)
             student.newNote = student.newNote === '1' ? true : false
             student.leaveNote = student.leaveNote === '1' ? true : false
             student.handoutExemption = student.handoutExemption === '1' ? true : false
             student.engDiscount = student.engDiscount === '1' ? true : false
             student.mathDiscount = student.mathDiscount === '1' ? true : false
-            student.newDate = new Date()
+            // student.newDate = new Date()
+            student.birth = transferDate(student.birth)
+            student.newDate = transferDate(student.newDate)
+            student.leaveDate = transferDate(student.leaveDate)
             POST_API('/academy01/02', { ...student, courseFeeList: student.courseFeeList ? student.courseFeeList : [] }).then(() => {
                 // dispatch({ type: 'EDIT_STUDENT', payload: { Student: student } })
             })
