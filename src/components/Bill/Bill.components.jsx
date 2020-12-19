@@ -9,7 +9,7 @@ export default withRouter(({ location, match, history }) => {
     const dispatch = useDispatch()
     const Student = useSelector(state => state.student.TempStudent)
     const Courses = useSelector(state => state.lesson.Courses)
-    const [student, setStudent] = useState(Student ? Student : {})
+    const [student, ] = useState(Student ? Student : {})
     const [bill, setBill] = useState({})
     const [temp, setTemp] = useState({ courseFeeId: '', expense: '', remark: '', expenseMonthStart: '', expenseMonthEnd: '' })
     const { mode } = match.params

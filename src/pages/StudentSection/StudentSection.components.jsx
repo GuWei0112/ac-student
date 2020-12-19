@@ -76,6 +76,11 @@ export default withRouter(({ match, history }) => {
         dispatch({ type: 'CLEAN_STUDENT', payload: {} })
         history.push('/student')
     }
+
+    const handleBack = () => {
+        dispatch({ type: 'INSERT_TEMP_STUDENT', payload: { TempStudent: {} } })
+        history.push('/student')
+    }
     let disabled = mode === 'view' ? true : false
     return (
         <Container>
@@ -96,10 +101,10 @@ export default withRouter(({ match, history }) => {
                 {mode === 'edit' || mode === 'add' ?
                     <React.Fragment>
                         <Button title={'儲存'} handleSubmit={() => { handleSaveStudent(mode) }} />
-                        <Button title={'取消'} handleOnClick={() => { history.push('/student') }} />
+                        <Button title={'取消'} handleOnClick={() => { handleBack() }} />
                     </React.Fragment>
                     :
-                    <Button style={{ gridColumn: '1/3' }} title={'返回'} handleOnClick={() => { history.push('/student') }} />
+                    <Button style={{ gridColumn: '1/3' }} title={'返回'} handleOnClick={() => { handleBack() }} />
                 }
             </StudentSectionContainer>
         </Container>

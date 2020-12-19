@@ -122,7 +122,7 @@ export default () => {
                                         <BillListButton className="fas fa-save" onClick={() => saveBill('saveBill')}></BillListButton>
                                     </React.Fragment>
                                 }
-                                {mode !== 'edit' && x.payDate == '' &&
+                                {mode !== 'edit' && x.payDate === '' &&
                                     <BillListButton className="fas fa-pen" onClick={() => handleChangeMode('edit')}></BillListButton>
                                 }
                             </div>

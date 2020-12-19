@@ -45,7 +45,9 @@ export default ({ mode, handleSumbit, course, flag }) => {
     const buttonRender = () => {
         switch (flag) {
             case 'student':
-                return pattern === 'edit' || pattern === 'add' ?'':
+                return pattern === 'edit' || pattern === 'add' ?
+                <LessonButton className='fas fa-save' onClick={(e) => handleOnClick(e, 'save')}></LessonButton>
+                :
                     pattern === 'view' ? [] : <LessonButton className='fas fa-pen' onClick={() => setPattern('edit')}></LessonButton>
             default:
                 return (pattern === 'edit' || pattern === 'add') ? <LessonButton className='fas fa-save' onClick={(e) => handleOnClick(e, 'save')}></LessonButton>
