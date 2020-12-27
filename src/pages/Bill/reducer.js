@@ -29,7 +29,7 @@ const BillReducer = (state = initializeState, action) => {
             // var i = action.payload.index
             return state
         case EDIT_BILL: // 編輯明細
-            return {...state, BillList:[action.payload.BillList]}
+            return {...state, BillList:action.payload.BillList}
         case CONFIRM_BILL: // 已繳費完成
             return state
         case SEARCH_PRINT_BILL_LIST: // 列印繳費查詢

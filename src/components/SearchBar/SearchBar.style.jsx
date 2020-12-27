@@ -7,7 +7,7 @@ export const SearchBarInputContainer = styled.div`
 margin: auto;
 border-radius: 20px;
 background-color: #3a5465;
-width: 30%;
+width: ${props=> props.flag? '40%':'30%'};
 height: 30px;
 padding: 10px;
 `

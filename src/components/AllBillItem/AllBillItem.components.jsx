@@ -21,7 +21,7 @@ export default withRouter(({
                 break
         }
     }
-    var flag = parseInt(lastPaymentDate ? lastPaymentDate.split('-')[1] : '0') === new Date().getMonth() + 1
+    var flag1 = parseInt(lastPaymentDate ? lastPaymentDate.split('-')[1] : '0') === new Date().getMonth() + 1
 
     return (
         <BillItemContainer>
@@ -29,8 +29,8 @@ export default withRouter(({
             <BillItem>{grade}</BillItem>
             <BillItem>{lastPaymentDate}</BillItem>
             {
-                flag === 'search' ? <BillButton className='fas fa-clipboard-list' onClick={() => handleClick(student.paymentList.length - 1)} />
-                    : flag ? [] :
+                flag1 === 'search' ? <BillButton className='fas fa-clipboard-list' onClick={() => handleClick(student.paymentList.length - 1)} />
+                    : flag1 ? [] :
                         <BillButton className='fas fa-calendar-plus' onClick={() => handleClick('add')} />
             }
         </BillItemContainer>

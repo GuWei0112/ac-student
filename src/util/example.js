@@ -24,15 +24,15 @@ const eduLevel = [{
     id: 7, title: '國一'
 }, {
     id: 8, title: '國二'
-},{
+}, {
     id: 9, title: '國三'
 }]
 
 const studentLevel = [{
     id: 10, title: '國小'
-},{
+}, {
     id: 11, title: '國中'
-},{
+}, {
     id: 1, title: '一年級'
 }, {
     id: 2, title: '二年級'
@@ -48,7 +48,7 @@ const studentLevel = [{
     id: 7, title: '國一'
 }, {
     id: 8, title: '國二'
-},{
+}, {
     id: 9, title: '國三'
 }]
 
@@ -102,6 +102,38 @@ const month = [
     , { value: '十二月', id: '12' }
 ]
 
+const monthSearch = [
+    {value: '全部', id: ''}
+    , { value: '一月', id: '1' }
+    , { value: '二月', id: '2' }
+    , { value: '三月', id: '3' }
+    , { value: '四月', id: '4' }
+    , { value: '五月', id: '5' }
+    , { value: '六月', id: '6' }
+    , { value: '七月', id: '7' }
+    , { value: '八月', id: '8' }
+    , { value: '九月', id: '9' }
+    , { value: '十月', id: '10' }
+    , { value: '十一月', id: '11' }
+    , { value: '十二月', id: '12' }
+]
+
+var nowYear = new Date().getFullYear()
+
+const year = [
+    { value: nowYear, id: nowYear }
+    , { value: nowYear - 1, id: nowYear - 1 }
+    , { value: nowYear - 2, id: nowYear - 2 }
+    , { value: nowYear - 3, id: nowYear - 3 }
+    , { value: nowYear - 4, id: nowYear - 4 }
+    , { value: nowYear - 5, id: nowYear - 5 }
+    , { value: nowYear - 6, id: nowYear - 6 }
+    , { value: nowYear - 7, id: nowYear - 7 }
+    , { value: nowYear - 8, id: nowYear - 8 }
+    , { value: nowYear - 9, id: nowYear - 9 }
+    , { value: nowYear - 10, id: nowYear - 10 }
+]
+
 const studentType = [
     { id: 1, name: 'name', type: 'text', title: '姓名' },
     { id: 2, name: 'birth', type: 'text', title: '生日' },
@@ -132,12 +164,12 @@ const courseFeeList = [{
 
 const payDept = [{
     id: 1, title: '大有本部'
-},{
-    id: 2, title: '大成本部'
-},{
+}, {
+    id: 2, title: '大成分部'
+}, {
     id: 3, title: '其他'
 }]
 
 export default {
-    menu, eduLevel, student, studentType, courseFeeList, month, payDept, studentLevel
+    menu, eduLevel, student, studentType, courseFeeList, month, year, payDept, studentLevel, monthSearch
 }
