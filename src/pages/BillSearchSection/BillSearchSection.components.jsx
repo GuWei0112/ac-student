@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { BillSectionContainer, BillListContainer, BillListButton } from './BillSearchSection.style'
 import { Container } from '../../components/Container'
 import { useDispatch, useSelector } from 'react-redux'
@@ -6,8 +6,6 @@ import example from '../../util/example'
 import POST_API from '../../api/default'
 export default ({ search }) => {
     const dispatch = useDispatch()
-    // const [mode, setMode] = useState('view')
-    // const [receiving, setReceiving] = useState('')
     const BillList = useSelector(state => state.bill.BillList)
     const Courses = useSelector(state => state.lesson.Courses)
 
@@ -43,7 +41,7 @@ export default ({ search }) => {
             </select>
             }
             {
-                !receivingUnit && receiving == '其他' &&
+                !receivingUnit && receiving === '其他' &&
                 <input style={{ width: '50%' }} value={receivingName} onChange={e => onChange(
                     'receivingName', e.target.value)}></input>
             }
@@ -52,7 +50,7 @@ export default ({ search }) => {
     }
 
     const checkReceivingName = (receiving, receivingName, j) => {
-        if (receiving == '其他') {
+        if (receiving === '其他') {
             if (!receivingName) {
                 alert('請先填寫分部名稱')
                 return false
@@ -90,7 +88,7 @@ export default ({ search }) => {
     }
 
     const saveBill = (payType, i) => {
-        var { payMainId, stdntId, courseFeeList, grade, paymentMonth, stdntName, receiving, receivingName } = BillList[i]
+        var { payMainId, stdntId, courseFeeList, grade, paymentMonth, receiving, receivingName } = BillList[i]
         let g = grade === '全部' ? '' : example.eduLevel.find(edu => edu.title === grade).id
         if (payType === 'saveBill') {
             POST_API('/academy03/04', { payMainId, stdntId, courseFeeList, grade: g, paymentMonth }).then(result => {

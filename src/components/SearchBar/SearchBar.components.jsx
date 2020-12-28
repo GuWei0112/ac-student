@@ -38,7 +38,7 @@ export default withRouter(({ handleSearch, history, mode }) => {
                     <SearchDropdownContainer>
                         {year}年
                         <SearchDropdownButton className="fas fa-angle-up" />
-                        <SearchDropdownContent style={mode === 'BillSearch'?{marginLeft:'0.1vw'}:{}}>
+                        <SearchDropdownContent style={mode === 'BillSearch' ? { marginLeft: '0.1vw' } : {}}>
                             {
                                 example.year.map(x => <SearchDropdown onClick={() => handleOnClick('year', x.value)}>{x.value}年</SearchDropdown>)
                             }
@@ -49,7 +49,7 @@ export default withRouter(({ handleSearch, history, mode }) => {
                     <SearchDropdownContainer >
                         {month}
                         <SearchDropdownButton className="fas fa-angle-up" />
-                        <SearchDropdownContent style={mode === 'BillSearch'?{marginLeft:'5vw'}:{}}>
+                        <SearchDropdownContent style={mode === 'BillSearch' ? { marginLeft: '5vw' } : {}}>
                             {
                                 example.monthSearch.map(x => <SearchDropdown style={{}} onClick={() => handleOnClick('month', x.value)}>{x.value}</SearchDropdown>)
                             }
@@ -60,7 +60,7 @@ export default withRouter(({ handleSearch, history, mode }) => {
                     <SearchDropdownContainer>
                         {grade}
                         <SearchDropdownButton className="fas fa-angle-up" />
-                        <SearchDropdownContent style={mode === 'BillSearch'?{marginLeft:'10vw'}:{}}>
+                        <SearchDropdownContent style={mode === 'BillSearch' ? { marginLeft: '10vw' } : {}}>
                             {
                                 mode === 'BillSearch' ?
                                     example.studentLevel.map(x => <SearchDropdown onClick={() => handleOnClick('grade', x.title)}>{x.title}</SearchDropdown>)

@@ -15,13 +15,32 @@ function createWindow() {
       nodeIntegration: true,
       webviewTag: true,
       nodeIntegrationInWorker: true,
-      enableRemoteModule: true
+      enableRemoteModule: true,
+      nativeWindowOpen: true
       // preload: path.join(__dirname, './src/electron/preload.js')
     }
     // , titleBarStyle: 'hidden'
   })
+
+  /**
+   * modal dialog
+   */
+  mainWindow.webContents.on('new-window', (event, url, frameName, disposition, options, additionalFeatures) => {
+    if (frameName === 'modal') {
+      // open window as modal
+      event.preventDefault()
+      Object.assign(options, {
+        frame: true,
+        modal: true,
+        parent: mainWindow,
+        width: 100,
+        height: 100
+      })
+      event.newGuest = new BrowserWindow(options)
+    }
+  })
   // if (isDev)
-  //   mainWindow.openDevTools()
+    // mainWindow.openDevTools()
   global.mainWindow = mainWindow
   const startURL = isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '../build/index.html')}`;
   mainWindow.maximize()

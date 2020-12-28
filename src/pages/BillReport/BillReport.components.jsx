@@ -9,8 +9,8 @@ export default () => {
         let m = example.month.find(x => x.value === month).id
         GET_API(`/academy05/01/${g}/${m}/1`).then(result => {
             if (result && result.data === 'success') {
-                window.open(`http://localhost:8080/angel/academy05/01/${g}/${m}/2`)
-            } else 
+                window.open(`http://localhost:8080/angel/academy05/01/${g}/${m}/2`, 'modal')
+            } else
                 alert('查無資料')
         })
     }
