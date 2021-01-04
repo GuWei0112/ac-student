@@ -63,7 +63,7 @@ export default withRouter(({ location, match, history }) => {
         if (student) {
             let g = student.grade === '全部' ? '' : example.eduLevel.find(edu => edu.title === student.grade).id
             var month = new Date().getMonth() + 1
-            POST_API('/academy03/04', { payMainId: '', courseFeeList: bill.courseFeeList, stdntId: student.stdntId, grade: g, paymentMonth: month }).then(result => {
+            POST_API('/academy03/04', { payMainId: '', courseFeeList: bill.courseFeeList, stdntId: student.stdntId, grade: g, paymentMonth: month, paymentYear: new Date().getFullYear() }).then(result => {
                 // console.log(result)
                 // dispatch({ type: 'ADD_BILL', payload: {} })
                 history.goBack()

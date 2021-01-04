@@ -88,11 +88,24 @@ export default ({ search }) => {
     }
 
     const saveBill = (payType, i) => {
-        var { payMainId, stdntId, courseFeeList, grade, paymentMonth, receiving, receivingName } = BillList[i]
+        var { payMainId, stdntId, courseFeeList, grade, paymentMonth, receiving, receivingName, paymentYear } = BillList[i]
         let g = grade === '全部' ? '' : example.eduLevel.find(edu => edu.title === grade).id
         if (payType === 'saveBill') {
-            POST_API('/academy03/04', { payMainId, stdntId, courseFeeList, grade: g, paymentMonth }).then(result => {
+            POST_API('/academy03/04', { payMainId, stdntId, courseFeeList, grade: g, paymentMonth, paymentYear }).then(result => {
                 alert(result.data)
+                if (result.data === 'success') {
+                    POST_API('/academy03/01', search).then(result => {
+                        if (result.data.length > 0) {
+                            result.data.forEach(x => {
+                                x.mode = 'view'
+                                x.receiving = x.receivingUnit ? x.receivingUnit : ''
+                                return x
+                            })
+                            dispatch({ type: 'SEARCH_STUDENT_BILL_LIST', payload: { BillList: result.data } })
+                        }
+                        else alert('查無資料')
+                    })
+                }
                 // dispatch({ type: 'SEARCH_STUDENT_BILL_LIST', payload: { BillList: [result.data] } })
             })
         }
@@ -135,7 +148,7 @@ export default ({ search }) => {
                                 {x.mode === 'edit' &&
                                     <React.Fragment>
                                         <BillListButton className="fas fa-plus" onClick={() => editBill('', '', '', 'add', j)}></BillListButton>
-                                        <BillListButton className="fas fa-save" onClick={() => saveBill('saveBill')}></BillListButton>
+                                        <BillListButton className="fas fa-save" onClick={() => saveBill('saveBill',j)}></BillListButton>
                                     </React.Fragment>
                                 }
                                 {x.mode !== 'edit' && x.payDate === '' &&

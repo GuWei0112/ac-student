@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Container } from '../../components/Container'
 import SearchBar from '../../components/SearchBar/SearchBar.components'
@@ -10,8 +10,8 @@ export default () => {
     const [searchParams, setSearchParams] = useState({})
     const handleSearch = (grade, student, month, paymentYear) => {
         let g = example.studentLevel.find(edu => edu.title === grade).id
-        var paymentMonth = example.month.find(m => m.value === month).id
-        setSearchParams({grade, student, month, paymentYear})
+        var paymentMonth = example.monthSearch.find(m => m.value === month).id
+        setSearchParams({ grade: g, name: student, month: paymentMonth, paymentYear })
         POST_API('/academy03/01', { paymentMonth, name: student, grade: g, paymentYear }).then(result => {
             if (result.data.length > 0) {
                 result.data.forEach(x => {
@@ -31,7 +31,7 @@ export default () => {
             <SearchBar handleSearch={(grade, student, month, year) => handleSearch(grade, student, month, year)} mode={'BillSearch'} />
             {
                 Bill.length > 0 &&
-                <BillSearchSection name={''} search ={searchParams}/>
+                <BillSearchSection name={''} search={searchParams} />
             }
         </Container>
     )
