@@ -89,7 +89,7 @@ export default ({ search }) => {
 
     const saveBill = (payType, i) => {
         var { payMainId, stdntId, courseFeeList, grade, paymentMonth, receiving, receivingName, paymentYear } = BillList[i]
-        let g = grade === '全部' ? '' : example.eduLevel.find(edu => edu.title === grade).id
+        let g = example.studentLevel.find(edu => edu.title === grade).id
         if (payType === 'saveBill') {
             POST_API('/academy03/04', { payMainId, stdntId, courseFeeList, grade: g, paymentMonth, paymentYear }).then(result => {
                 alert(result.data)

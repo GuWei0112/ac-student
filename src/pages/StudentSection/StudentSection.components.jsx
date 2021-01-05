@@ -3,13 +3,14 @@ import { withRouter } from 'react-router-dom'
 import { Container } from '../../components/Container'
 import { StudentSectionContainer, StudentSectionWrapper, StudentSectionLine } from './StudentSection.style'
 import Input from '../../components/Input/Input.components'
+import Select from '../../components/Select/Select.components'
 import RadioButton from '../../components/RadioButton/RadioButton.components'
 import example from '../../util/example'
 import Button from '../../components/Button/Button.components'
 import LessonList from '../../components/LessonList/LessonList.components'
 import POST_API from '../../api/default'
 import { useDispatch, useSelector } from 'react-redux'
-import {transferDate} from '../../util/date'
+import { transferDate } from '../../util/date'
 export default withRouter(({ match, history }) => {
     const dispatch = useDispatch()
     const Student = useSelector(state => state.student.TempStudent)
@@ -62,12 +63,15 @@ export default withRouter(({ match, history }) => {
             student.newDate = transferDate(student.newDate)
             student.leaveDate = transferDate(student.leaveDate)
             student.newDate = new Date()
+            student.courseFeeList.forEach(course => {
+                if (!course.signUpId)
+                    course.signUpId = ''
+            })
             POST_API('/academy01/02', { ...student, courseFeeList: student.courseFeeList ? student.courseFeeList : [] }).then(({ data }) => {
                 // dispatch({ type: 'ADD_STUDENT', payload: { Student: student } })
             })
         }
         else if (mode === 'edit') {
-            console.log(student)
             student.newNote = student.newNote === '1' ? true : false
             student.leaveNote = student.leaveNote === '1' ? true : false
             student.handoutExemption = student.handoutExemption === '1' ? true : false
@@ -77,6 +81,10 @@ export default withRouter(({ match, history }) => {
             student.birth = transferDate(student.birth)
             student.newDate = transferDate(student.newDate)
             student.leaveDate = transferDate(student.leaveDate)
+            student.courseFeeList.forEach(course => {
+                if (!course.signUpId)
+                    course.signUpId = ''
+            })
             POST_API('/academy01/02', { ...student, courseFeeList: student.courseFeeList ? student.courseFeeList : [] }).then(() => {
                 // dispatch({ type: 'EDIT_STUDENT', payload: { Student: student } })
             })
@@ -97,6 +105,9 @@ export default withRouter(({ match, history }) => {
                 {example.studentType.map(x => {
                     if (x.type === 'text')
                         return (<Input {...x} disabled={disabled}
+                            handleOnChange={(name, value) => handleOnChange(name, value)} value={student ? student[x.name] : ''} />)
+                    else if (x.type === 'select')
+                        return (<Select {...x} disabled={disabled}
                             handleOnChange={(name, value) => handleOnChange(name, value)} value={student ? student[x.name] : ''} />)
                     else
                         return (<RadioButton {...x} disabled={disabled}

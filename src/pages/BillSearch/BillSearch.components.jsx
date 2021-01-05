@@ -11,7 +11,7 @@ export default () => {
     const handleSearch = (grade, student, month, paymentYear) => {
         let g = example.studentLevel.find(edu => edu.title === grade).id
         var paymentMonth = example.monthSearch.find(m => m.value === month).id
-        setSearchParams({ grade: g, name: student, month: paymentMonth, paymentYear })
+        setSearchParams({ grade: g, name: student, paymentMonth, paymentYear })
         POST_API('/academy03/01', { paymentMonth, name: student, grade: g, paymentYear }).then(result => {
             if (result.data.length > 0) {
                 result.data.forEach(x => {

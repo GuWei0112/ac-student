@@ -28,6 +28,27 @@ const eduLevel = [{
     id: 9, title: '國三'
 }]
 
+
+const edu = [{
+    id: 1, title: '一年級'
+}, {
+    id: 2, title: '二年級'
+}, {
+    id: 3, title: '三年級'
+}, {
+    id: 4, title: '四年級'
+}, {
+    id: 5, title: '五年級'
+}, {
+    id: 6, title: '六年級'
+}, {
+    id: 7, title: '國一'
+}, {
+    id: 8, title: '國二'
+}, {
+    id: 9, title: '國三'
+}]
+
 const studentLevel = [{
     id: 10, title: '國小'
 }, {
@@ -144,7 +165,7 @@ const studentType = [
     { id: 7, name: 'leaveNote', type: 'radio', title: '離校註記' },
     { id: 8, name: 'newDate', type: 'text', title: '入校日期' },
     { id: 9, name: 'leaveDate', type: 'text', title: '離校日期' },
-    { id: 10, name: 'grade', type: 'text', title: '年級' },
+    { id: 10, name: 'grade', type: 'select', title: '年級' },
     { id: 11, name: 'handoutExemption', type: 'radio', title: '講義減免註記' },
     { id: 12, name: 'engDiscount', type: 'radio', title: '兒美優惠' },
     { id: 13, name: 'mathDiscount', type: 'radio', title: '數學優惠' },
@@ -171,5 +192,5 @@ const payDept = [{
 }]
 
 export default {
-    menu, eduLevel, student, studentType, courseFeeList, month, year, payDept, studentLevel, monthSearch
+    menu, eduLevel, student, studentType, courseFeeList, month, year, payDept, studentLevel, monthSearch, edu
 }
