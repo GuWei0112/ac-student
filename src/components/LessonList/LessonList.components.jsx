@@ -7,7 +7,7 @@ export default ({ handleSumbit, mode, courses, flag }) => {
     return (
         <LessonListContainer>
             課程清單
-            {(mode === 'edit' || mode === 'add') && <LessonAddButton className="fas fa-plus" onClick={() => handleSumbit('new', 0, 'name', Courses[0].name)}></LessonAddButton>}
+            {(mode === 'edit' || mode === 'add') && <LessonAddButton className="fas fa-plus" onClick={() => handleSumbit('new', courses.length, 'courseFeeId', Courses[0].courseFeeId)}></LessonAddButton>}
             {courses.map((course, i) => <Lesson
                 flag={flag}
                 handleSumbit={(mode, name, value) => handleSumbit(mode, i, name, value)} mode={mode} course={course} />)}

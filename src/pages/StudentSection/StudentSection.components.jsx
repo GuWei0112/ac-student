@@ -63,11 +63,16 @@ export default withRouter(({ match, history }) => {
             student.newDate = transferDate(student.newDate)
             student.leaveDate = transferDate(student.leaveDate)
             student.newDate = new Date()
-            student.courseFeeList.forEach(course => {
-                if (!course.signUpId)
-                    course.signUpId = ''
-            })
-            POST_API('/academy01/02', { ...student, courseFeeList: student.courseFeeList ? student.courseFeeList : [] }).then(({ data }) => {
+            console.log(student)
+            if(!student.grade)
+                student.grade = '1'
+            if (student.courseFeeList)
+                student.courseFeeList.forEach(course => {
+                    if (!course.signUpId)
+                        course.signUpId = ''
+                })
+            POST_API('/academy01/02', { ...student, courseFeeList: student.courseFeeList ? student.courseFeeList : [] }).then((result) => {
+                alert(result.data)
                 // dispatch({ type: 'ADD_STUDENT', payload: { Student: student } })
             })
         }
@@ -81,11 +86,13 @@ export default withRouter(({ match, history }) => {
             student.birth = transferDate(student.birth)
             student.newDate = transferDate(student.newDate)
             student.leaveDate = transferDate(student.leaveDate)
-            student.courseFeeList.forEach(course => {
-                if (!course.signUpId)
-                    course.signUpId = ''
-            })
-            POST_API('/academy01/02', { ...student, courseFeeList: student.courseFeeList ? student.courseFeeList : [] }).then(() => {
+            if (student.courseFeeList)
+                student.courseFeeList.forEach(course => {
+                    if (!course.signUpId)
+                        course.signUpId = ''
+                })
+            POST_API('/academy01/02', { ...student, courseFeeList: student.courseFeeList ? student.courseFeeList : [] }).then((result) => {
+                alert(result.data)
                 // dispatch({ type: 'EDIT_STUDENT', payload: { Student: student } })
             })
         }

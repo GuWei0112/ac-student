@@ -11,7 +11,6 @@ export default ({ mode, handleSumbit, course, flag }) => {
         handleSumbit(mode, 'lessonList', lesson)
     }
     const selectedCourses = Courses.find(course => course.courseFeeId === lesson.courseFeeId)
-
     const handleOnChange = (e) => {
         setLesson({ ...lesson, courseFeeName: e.target.value })
     }
